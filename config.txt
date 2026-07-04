@@ -7,3 +7,4 @@
 
 # --external-downloader bin/aria2c
 # --external-downloader-args '-c -x 16 -k 1M'
+  --ignore-errors
