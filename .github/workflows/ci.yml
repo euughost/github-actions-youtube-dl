@@ -1,6 +1,7 @@
 name: ci
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,8 +21,7 @@ jobs:
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git pull --rebase
           ./bin/youtube-dl --config-location config.txt
-          # ========== 以下为修改部分 ==========
-          sudo apt-get update && sudo apt-get install -y zip   # 显式安装 zip
+          sudo apt-get update && sudo apt-get install -y zip
           zip -r youtube_batch.zip downloads/
 
       - name: Upload artifact
