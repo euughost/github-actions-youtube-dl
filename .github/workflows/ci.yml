@@ -8,7 +8,7 @@ jobs:
 
     permissions:
       contents: write
-      
+
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
@@ -20,6 +20,12 @@ jobs:
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git pull --rebase
           ./bin/youtube-dl --config-location config.txt
-          git add .
-          git commit -m "download youtube video"
-          git push
+          # ========== 以下为修改部分 ==========
+          sudo apt-get update && sudo apt-get install -y zip   # 显式安装 zip
+          zip -r youtube_batch.zip downloads/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: youtube_batch
+          path: youtube_batch.zip
