@@ -2,7 +2,7 @@
 --output downloads/%(title)s_%(id)s.%(ext)s
 --continue
 # --write-description
-# --write-info-json
+ --write-info-json
 # --write-thumbnail
 
 # --external-downloader bin/aria2c
